@@ -47,6 +47,7 @@ class SigninController
                     $user->erasePwd();
                     session_regenerate_id();
                     $_SESSION['user'] = $user;
+                    $_SESSION['id_user'] = $user->getIdUser();
                     header('Location: /');
                     die;
                 } else {

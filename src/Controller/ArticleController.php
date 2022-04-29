@@ -5,6 +5,9 @@ namespace App\Controller;
 use PDOException;
 use App\Model\Article;
 use App\Dao\ArticleDao;
+use App\Model\Comment;
+use App\Dao\CommentDao;
+
 
 class ArticleController
 {
@@ -85,6 +88,16 @@ class ArticleController
 
         if (is_null($article)) {
             header('Location: /');
+            die;
+        }
+        try {
+            $commentDao = new CommentDao();
+            $comments = $commentDao->getAll($id);
+           
+        } catch (PDOException $e) {
+            echo "Oops ! I think something went wrong";
+            echo "<br>";
+            echo $e->getMessage();
             die;
         }
 
